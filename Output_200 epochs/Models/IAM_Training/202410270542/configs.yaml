@@ -1,0 +1,8 @@
+batch_size: 64
+height: 32
+learning_rate: 0.002
+max_text_length: 21
+model_path: Models/IAM_Training/202410270542
+train_epochs: 1000
+vocab: '!"#&''()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+width: 128
