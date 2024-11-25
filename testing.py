@@ -24,21 +24,22 @@ if __name__ == "__main__":
     import pandas as pd
     from tqdm import tqdm
 
-    model = ImageToWordModel(model_path="Models/IAM_Training/202410231321/model.onnx")
-
-    df = pd.read_csv("Models/IAM_Training/202410231321/val.csv").values.tolist()
+    model = ImageToWordModel(model_path="Output_200 epochs/Models/IAM_Training/202410270542/model.onnx")
 
     accum_cer = []
     
-    image_path = "C:/Users/Shyam/Downloads/create.jpg"
+    image_path = "C:/Users/Shyam/Downloads/arn.jpg"
+    
     image = cv2.imread(image_path.replace("\\", "/"))
+
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Convert image to greyscale
+    image = np.stack((image,) * 3, axis=-1) # Expand dims for user input images
+    print(image.shape)
+    
 
     prediction_text = model.predict(image)
     print(f"Prediction: {prediction_text}")
 
-    #cer = get_cer(prediction_text, label)
-    #print(f"Image: {image_path}, Label: {label}, Prediction: {prediction_text}, CER: {cer}")
-
-    #        accum_cer.append(cer)
-
-    #print(f"Average CER: {np.average(accum_cer)}")
+    cv2.imshow('Image Window', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
